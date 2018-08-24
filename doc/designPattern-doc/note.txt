@@ -1,0 +1,83 @@
+创建者模式 - 用于创建对象
+单例模式
+核心作用
+  保证一个类只有一个实例
+  全局提供一个访问该实例的访问点
+优点
+  资源消耗少
+实现方式 (测试: cn.jk.study.designPattern.TestSingleton)
+  饿汉式 - 线程安全 资源利用率低 调用效率高 非延时加载 (cn.jk.study.designPattern.singleton.Demo1)
+  懒汉式 - 线程安全 资源利用率高 调用效率低 延时加载 (cn.jk.study.designPattern.singleton.Demo2)
+  双重检测锁式 - 由于 JVM 底层内部模型原因，会出现问题 (cn.jk.study.designPattern.singleton.Demo3)
+    在懒汉式基础上将同步移动到了 if 内部
+  * 静态内部类式 - 线程安全 调用效率高 延时加载 (cn.jk.study.designPattern.singleton.Demo4)
+  枚举单例 - 线程安全 调用效率高 非延时加载 (cn.jk.study.designPattern.singleton.Demo5)
+    避免通过 反射 反序列化 生成新的对象
+单例模式 (除枚举外) 的 破解 及 防止
+  反射 (cn.jk.study.designPattern.singleton.Demo6 / cn.jk.study.designPattern.singleton.Test1)
+  反序列化 (cn.jk.study.designPattern.singleton.Demo6 / cn.jk.study.designPattern.singleton.Test2)
+
+
+
+应用场景
+  Windows 的 Task Manager (任务管理器)
+  Windows 的 Recycle Bin (回收站)
+  * 项目中，读取配置文件的类
+  网站的计数器，实现同步
+  * 应用程序的日志应用 - 日志文件一直处于打开状态，只能由一个实例操作
+  * 数据库连接池
+  操作系统的文件系统
+  * Application
+  * Spring 中的 bean 默认为单例模式 - 便于 spring 容器管理
+  * Servlet 编程中的 Servlet
+  * Spring MVC / struts1 框架中的控制对象
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+结构模式
+
+行为模式
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

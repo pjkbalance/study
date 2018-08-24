@@ -1,0 +1,2 @@
+file - Settings -plugins - Browse repositories - [search NodeJS] - install - restart idea
+file - Settings - Languages & Frameworks - JavaScript - [JavaScript language version select ECMAScript 6]

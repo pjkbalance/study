@@ -1,0 +1,28 @@
+# ide
+.idea/
+*/.idea/
+*.iml
+*/*.iml
+out/
+*/out/
+target/
+*/target/
+
+# docs
+API/
+*/API/
+
+# lib
+lib/
+*/lib/
+*.jar
+*/*.jar
+*.zip
+*/*.zip
+
+# java
+*.class
+*/*.class
+
+# nodejs
+node_modules

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="user1" class="cn.jk.study.spring.part1.spring3.bean.User" />
+
+    <bean id="user2" class="cn.jk.study.spring.part1.spring3.bean.User">
+        <constructor-arg index="0" value="name-2"/>
+    </bean>
+    <bean id="user3" class="cn.jk.study.spring.part1.spring3.bean.User">
+        <constructor-arg name="name" value="name-3"/>
+        <constructor-arg name="sex" value="sex-3"/>
+    </bean>
+    <bean id="user4" class="cn.jk.study.spring.part1.spring3.bean.User">
+        <constructor-arg type="java.lang.String" value="sex-3"/>
+        <constructor-arg type="java.lang.String" value="name-3"/>
+    </bean>
+
+</beans>

@@ -1,0 +1,158 @@
+node命令
+进入交互式解释器，可用于测试js
+
+回调函数
+异步编程的直接体现
+一般作为参数的最后一个参数出现 如: function(name, age, ..., callback)
+
+在 Node 应用程序中，执行异步操作的函数将回调函数作为最后一个参数， 回调函数接收错误对象作为第一个参数。
+
+events 模块只提供了一个对象: events.EventEmitter。
+EventEmitter 的核心就是事件触发与事件监听器功能的封装
+只有注册了相应事件的EventEmitter才可以触发相应事件
+
+大多数时候我们不会直接使用 EventEmitter，而是在对象中继承它。包括 fs、net、 http 在内的，只要是支持事件响应的核心模块都是 EventEmitter 的子类。
+
+为什么要这样做呢？原因有两点:
+具有某个实体功能的对象实现事件符合语义， 事件的监听和发生应该是一个对象的方法。
+JavaScript 的对象机制是基于原型的，支持 部分多重继承，继承 EventEmitter 不会打乱对象原有的继承关系。
+
+Buffer 实例一般用于表示编码字符的序列
+
+在浏览器 JavaScript 中，通常 window 是全局对象
+在 Node.js 中的全局对象是 global，所有全局变量（除了 global 本身以外）都是 global 对象的属性。
+
+
+全局变量
+永远使用 var 定义变量以避免引入全局变量，因为全局变量会污染 命名空间，提高代码的耦合风险。
+__filename 表示当前正在执行的脚本的文件名
+__dirname 表示当前执行脚本所在的目录
+
+setTimeout(cb, ms) 全局函数在指定的毫秒(ms)数后执行指定函数(cb)。:setTimeout() 只执行一次指定函数。
+clearTimeout( t ) 全局函数用于停止一个之前通过 setTimeout() 创建的定时器。 参数 t 是通过 setTimeout() 函数创建的定时器。
+// 两秒后执行以上函数
+var t = setTimeout(printHello, 2000);
+// 清除定时器
+clearTimeout(t);
+
+setInterval(cb, ms) 全局函数在指定的毫秒(ms)数后执行指定函数(cb)。
+返回一个代表定时器的句柄值。可以使用 clearInterval(t) 函数来清除定时器。
+setInterval() 方法会不停地调用函数，直到 clearInterval() 被调用或窗口被关闭。
+
+console.time(label): 输出时间，表示计时开始。
+console.timeEnd(label): 结束时间，表示计时结束。
+console.trace():向标准错误流输出当前的调用栈。
+
+process : 描述当前Node.js 进程状态的对象 详见: https://www.runoob.com/nodejs/nodejs-global-object.html
+
+util 是一个Node.js 核心模块，提供常用函数的集合，用于弥补核心JavaScript 的功能 过于精简的不足。
+util.inherits(constructor, superConstructor) 实现对象间原型继承
+JavaScript 的面向对象特性是基于原型的，与常见的基于类的不同。JavaScript 没有 提供对象继承的语言级别特性，而是通过原型复制来实现的。
+注意 子类仅仅继承了父类在原型中定义的函数，而构造函数内部创造的属性和函数都没有被子类继承。 需了解 JS构造函数内的方法与构造函数prototype属性上方法的对比: https://www.cnblogs.com/yeminglong/p/6346552.html
+
+util.inspect(object,[showHidden],[depth],[colors])是一个将任意对象转换 为字符串的方法，通常用于调试和错误输出。
+它至少接受一个参数 object，即要转换的对象
+showHidden 是一个可选参数，如果值为 true，将会输出更多隐藏信息。
+depth 表示最大递归的层数，如果对象很复杂，你可以指定层数以控制输出信息的多 少。如果不指定depth，默认会递归2层，指定为 null 表示将不限递归层数完整遍历对象。
+如果color 值为 true，输出格式将会以ANSI 颜色编码，通常用于在终端显示更漂亮 的效果。
+
+util.isArray(object) 如果给定的参数 "object" 是一个数组
+util.isRegExp(object) 如果给定的参数 "object" 是一个正则表达式
+util.isDate(object) 如果给定的参数 "object" 是一个日期
+util.isError(object) 如果给定的参数 "object" 是一个错误对象
+
+Node.js 文件系统 https://www.runoob.com/nodejs/nodejs-fs.html
+var fs = require("fs")
+fs.open(path, flags[, mode], callback) 在异步模式下打开文件的语法格式
+    path - 文件的路径。
+    flags - 文件打开的行为。具体值详见下文。
+    mode - 设置文件模式(权限)，文件创建默认权限为 0666(可读，可写)。
+    callback - 回调函数，带有两个参数如：callback(err, fd)。
+fs.stat(path, callback) 异步模式获取文件信息
+    stats.isFile()	如果是文件返回 true，否则返回 false。
+    stats.isDirectory()	如果是目录返回 true，否则返回 false。
+    stats.isBlockDevice()	如果是块设备返回 true，否则返回 false。
+    stats.isCharacterDevice()	如果是字符设备返回 true，否则返回 false。
+    stats.isSymbolicLink()	如果是软链接返回 true，否则返回 false。
+    stats.isFIFO()	如果是FIFO，返回true，否则返回 false。FIFO是UNIX中的一种特殊类型的命令管道。
+    stats.isSocket()	如果是 Socket 返回 true，否则返回 false。
+fs.writeFile(file, data[, options], callback)
+    writeFile 直接打开文件默认是 w 模式，所以如果文件存在，该方法写入的内容会覆盖旧的文件内容。
+    file - 文件名或文件描述符。
+    data - 要写入文件的数据，可以是 String(字符串) 或 Buffer(缓冲) 对象。
+    options - 该参数是一个对象，包含 {encoding, mode, flag}。默认编码为 utf8, 模式为 0666 ， flag 为 'w'
+    callback - 回调函数，回调函数只包含错误信息参数(err)，在写入失败时返回。
+fs.read(fd, buffer, offset, length, position, callback)
+    fd - 通过 fs.open() 方法返回的文件描述符。
+    buffer - 数据写入的缓冲区。
+    offset - 缓冲区写入的写入偏移量。
+    length - 要从文件中读取的字节数。
+    position - 文件读取的起始位置，如果 position 的值为 null，则会从当前文件指针的位置读取。
+    callback - 回调函数，有三个参数err, bytesRead, buffer，err 为错误信息， bytesRead 表示读取的字节数，buffer 为缓冲区对象。
+fs.close(fd, callback) 异步模式下关闭文件
+fs.ftruncate(fd, len, callback) 异步模式下截取文件
+    fd - 通过 fs.open() 方法返回的文件描述符。
+    len - 文件内容截取的长度。
+    callback - 回调函数，没有参数。
+fs.unlink(path, callback) 删除文件的语法
+fs.mkdir(path[, mode], callback) 创建目录
+    path - 文件路径。
+    mode - 设置目录权限，默认为 0777。
+    callback - 回调函数，没有参数。
+fs.readdir(path, callback) 读取目录
+fs.rmdir(path, callback) 删除目录
+
+
+POST 请求的内容全部的都在请求体中，http.ServerRequest 并没有一个属性内容为请求体，原因是等待请求体传输可能是一件耗时的工作。
+比如上传文件，而很多时候我们可能并不需要理会请求体的内容，恶意的POST请求会大大消耗服务器的资源，所以 node.js 默认是不会解析请求体的，当你需要的时候，需要手动来做。
+
+Node.js OS 模块 提供了一些基本的系统操作函数。我们可以通过以下方式引入该模块：
+var os = require("os")
+1	os.tmpdir() 操作系统的默认临时文件夹。
+2	os.endianness()  CPU 的字节序，可能的是 "BE" 或 "LE"。
+3	os.hostname() 操作系统的主机名。
+4	os.type() 操作系统名
+5	os.platform() 操作系统名
+6	os.arch() 操作系统 CPU 架构，可能的值有 "x64"、"arm" 和 "ia32"。
+7	os.release() 操作系统的发行版本。
+8	os.uptime() 操作系统运行的时间，以秒为单位。
+9	os.loadavg() 一个包含 1、5、15 分钟平均负载的数组。
+10	os.totalmem() 系统内存总量，单位为字节。
+11	os.freemem() 操作系统空闲内存量，单位是字节。
+12	os.cpus() 一个对象数组，包含所安装的每个 CPU/内核的信息：型号、速度（单位 MHz）、时间（一个包含 user、nice、sys、idle 和 irq 所使用 CPU/内核毫秒数的对象）。
+13	os.networkInterfaces() 获得网络接口列表。
+
+Path 模块 提供了处理和转换文件路径的工具。
+Net 模块 用于底层的网络通信。提供了服务端和客户端的的操作。
+DNS 模块 用于解析域名。
+Domain 模块 简化异步代码的异常处理，可以捕捉处理try catch无法捕捉的。
+
+
+Web 服务器 (web_architecture.jpg)
+基本功能: 提供 Web 信息浏览服务，只支持 HTTP 协议、HTML 文档及 URL；与网络浏览器配合
+大多数服务器只支持服务端的脚本语言
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop.xsd">
+    <bean id="userService" class="cn.jk.study.spring.part1.spring6.service.impl.UserServiceImpl"/>
+    <bean id="beforeLog" class="cn.jk.study.spring.part1.spring6.log.BeforeLog"/>
+    <bean id="afterLog" class="cn.jk.study.spring.part1.spring6.log.AfterLog"/>
+    <aop:config>
+        <aop:pointcut id="logPointCut" expression="execution(* cn.jk.study.part1.spring6.service.impl.*.*(..))"/>
+        <aop:advisor advice-ref="beforeLog" pointcut-ref="logPointCut"/>
+        <aop:advisor advice-ref="afterLog" pointcut-ref="logPointCut"/>
+    </aop:config>
+</beans>

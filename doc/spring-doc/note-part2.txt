@@ -1,0 +1,70 @@
+spring 源码
+
+Spring 容器
+class ClassPathXmlApplicationContext implements [ApplicationContext implements BeanFactory]
+  ApplicationContext 事件机制: 观察者模式 (cn.jk.study.part2.demo1)
+  ApplicationContext 接口继承了 MessageSource 接口，因此具有国际化功能。MessageSource 接口提供了 getMessage(...) 方法用来进行字符串转换。
+ApplicationContext ac = new ClassPathXmlApplicationContext("..");
+  String[] configLocations = ... (pathArray)
+  refresh() {
+    synchronized () {
+
+
+
+
+
+
+    }
+  }
+
+
+IOC 底层实现
+@Service
+class OrderServiceImpl extends OrderService {}
+  将对象实例化 - OrderService orderService = new OrderServiceImpl();
+  map.put("orderService", orderService);
+@Autowired
+OrderService orderService;
+  map.get("orderService");
+
+
+@Transactioanl
+public void addOrder() {
+  xx
+}
+== 代理模式 == >
+public void addOrder() {
+  begin.transaction().begin();
+  xx
+  commit/rollback;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

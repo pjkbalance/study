@@ -1,0 +1,189 @@
+Annotation 注解
+  不是程序，可以对程序作出解释 与注释相同
+  可以被其他程序 (编译器等) 读取
+
+格式
+  @注解名(value={"","",...})
+  数组使用 {"","",...}
+
+可使用位置
+  package
+  class
+  method
+  field
+
+注解定义
+/**
+  * meta-annotation begin
+  * 元注解 (java.lang.annotation)
+  */
+@Target(value=ElementType.xxx) //描述注解的适用范围
+/**
+  * 注解保留策略
+  * SOURCE: 在原文件中有效
+  * CLASS: 在 .class 文件中有效
+  * RUNTIME: 在运行时有效，可被反射机制读取 (自定义注解一般使用)
+  */
+@Retention()
+@Documented() //
+@Inherited() //
+/* meta-annotation end */
+public @interface annotationName {
+  /**
+    * 参数信息
+    * String[]: 属性类型
+    * value: 属性名 (只有一个属性时，一般属性名为 value；且调用时不需使用属性名)
+    */
+  String[] value()[ default ""];
+}
+
+内置注解 (cn.jk.study.annotation.demo01)
+  @Override: 重写
+  @Deprecated: 遗弃的方法
+  @SuppressWarnings: 抑制编译时的警告信息
+
+自定义注解 (cn.jk.study.annotation.demo02)
+  注解定义
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

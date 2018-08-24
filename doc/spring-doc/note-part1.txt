@@ -1,0 +1,223 @@
+简单使用
+理念: 使现有技术更加实用 —— 不创建新的框架
+作用: 整合现有框架技术
+
+优点
+  轻量级: 使用框架不需继承相应的类；不需实现相应的接口
+  IOC容器: 控制反转
+  AOP: 面向切面编程
+  对事务的支持
+  对框架的支持
+  
+内容
+  spring-overview.png
+Beans: 创建对象 - Core: 核心代码 - Context: 上下文 - SpEL: 表达式
+junit test
+
+IOC 控制反转
+  应用程序本身创建(service层) -> 客户端创建，应用程序接收对象(调用service层)
+  将对象具体的实现分离出来，可以更多的关注业务
+  真正面向接口编程，实现解耦
+
+bean: 由spring容器创建管理的java对象(cn.pjkbalance.study.spring.spring1)
+  Hello对象及对象属性均由Spring容器创建/设置；该过程中:
+  控制的内容: 指谁来控制对象的创建；传统的程序由程序本身控制，使用Spring后由Spring控制
+  反转: 权限的转移；程序本身创建对象，变为程序被动接收对象(主动 -> 被动)
+
+实现: 通过 ioc 容器 - BeanFactory 实现
+ref: 引用由spring创建的对象
+创建、管理对象 (生命周期)
+
+使用ioc创建对象的方式 (cn.jk.study.part1.spring3)
+通过无参构造函数创建
+通过有参构造函数创建
+通过工厂方法创建
+
+<beans>
+  <!-- 导入已有的xml配置 -->
+  <import resource="xxx.xml"/>
+  <!-- id: bean 的标识符，需要唯一 -->
+  <!-- 若没有 id 则 name 为标识符 -->
+  <!-- 若有 id 则 name 为别名，可为多个，分隔符很多 -->
+  <!-- 若 id name 均未设置，则可通过 class 获取对象 -->
+  <bean id="beanName" name="user1,user2 user3(别名)" class="beanClass">
+    <!--有参构造函数-->
+    <constructor-arg name="argName" value="argValue"/>
+  </bean>
+  <alias name="beanName(定义好的 bean)" alias="user1,user2,...(别名)" />
+</beans>
+
+依赖注入
+依赖: bean 对象依赖于 Spring 容器创建； bean 对象依赖于资源
+注入: bean 对象所依赖的资源由 spring 容器设置、装配
+构造器注入
+setter注入
+  被注入的属性必须有set方法 - 见附录
+
+bean 作用域 - scope
+  singleton: 单例 - 整个容器中只有一个对象实例
+  prototype: 原型模式 - 每次获取 bean 均产生一个新的对象
+  request: 每次请求时创建一个新的对象
+  session: 会话范围内只有一个对象
+  global session: 只在 protlet 下有用，表示 application
+  application: 一个应用范围内只有一个对象
+
+自动装配: 简化 sprint 配置 - 可配置 beans default-autowire - 不推荐；最好使用注解
+<bean id="" class="" autowire="no(不使用)/byName/byType/constructor"/>
+等价
+<bean id="" class="">
+  <property name="" ref=""/>
+</bean>
+
+
+静态代理 (cn.jk.study.part1.spring4)
+proxy.png
+角色分析
+  抽象角色: 一般使用接口或抽象类实现 (Rent)
+  真实角色: 被代理的角色 (Host)
+  代理角色: 代理真实角色 (Proxy)，一般会做一些附属操作
+  客户端: 使用代理角色进行操作 (Client)
+优点
+  使真实角色更加纯粹，不在关注公共功能
+  公共功能由代理完成，实现业务分工
+  公共业务发生改变或扩展时，变得更加集中和方便
+缺点
+  更多的类 (代理类)，工作两边打
+
+动态代理 (cn.jk.study.part1.spring5)
+  角色与静态代理一致
+  代理类是动态生成的
+动态代理分为
+  基于接口的动态代理 - jdk动态代理原理
+  基于类的动态代理 - cglib
+目前使用 javasist 生成动态代理
+
+jdk 动态代理
+InvocationHandler 接口 - 代理实例 (Proxy) 的 调用处理程序 ( rent() ) 实现的接口
+每个 代理实例 具有一个 关联的 调用处理程序。对 代理实例 调用方法时 (proxy.rent())，将对方法进行编码并将其指派给他调用处理程序的 invoke 方法
+invoke(Object proxy, Method method, Object[] args)
+在代理实例上处理方法调用并返回结果
+  proxy: 代理实例
+  method: 代理实例的方法
+  args: 参数
+Proxy 类
+提供用于创建动态代理类和实例的静态方法，还是这些方法创建的所有动态代理类的超类
+static Object newProxyInstance(ClassLoader loader, Class<?>[] interfaces, InvocationHandler h)
+  loader: 类加载器
+  interfaces: 代理类需要实现的借口
+  h: 纸牌方法调用的调用处理程序
+一个动态代理一般代理 多个 属于 某一类业务 的类
+
+
+面向切面编程 AOP - 在不改变原有代码的情况下新增功能
+作用
+  提供声明式服务 (事务)
+  允许用户实现自定义切面
+传统编程模式
+  纵向编程模式: 传统编程模式.png
+AOP编程模式
+  横向编程模式: 横向编程模式.png
+  实现机理: 动态代理
+关注点: 增加的某一类 与实际业务无关的 功能，如: 日志/安全/缓存/事务/异常 等
+切面: 一个关注点的模块化
+连接点: 某个方法 (业务方法)的执行
+通知: 在切面某个特定的连接点上执行的动作
+  前置通知
+  后置通知
+  异常通知
+  最终通知
+  环绕通知
+织入: 将切面连接到其他应用程序类型或者对象上，并创建一个被通知的对象
+
+使用 spring 实现 AOP
+实现方式
+  通过 Spring API 实现 (cn.jk.study.part1.spring6)
+    <aop:config>
+        <!-- 第一个 * : 返回类型 -->
+        <aop:pointcut id="logPointCut" expression="execution(* cn.jk.study.part1.spring6.service.impl.*.*(..))"/>
+        <aop:advisor advice-ref="beforeLog" pointcut-ref="logPointCut"/>
+        <aop:advisor advice-ref="afterLog" pointcut-ref="logPointCut"/>
+    </aop:config>
+  通过 自定义类 实现 (cn.jk.study.part1.spring7)
+    <aop:config>
+        <aop:pointcut id="pointcut" expression="execution(* cn.jk.study.part1.spring7.service.impl.*.*(..))"/>
+        <aop:aspect ref="log">
+            <aop:before method="before" pointcut-ref="pointcut"/>
+            <aop:after method="after" pointcut-ref="pointcut"/>
+        </aop:aspect>
+    </aop:config>
+  通过 注解 实现 (cn.jk.study.part1.spring8)
+    <aop:aspectj-autoproxy/>
+
+
+整合Mybatis (cn.jk.study.part1.spring9)
+  导入 jar 包
+  编写配置文件
+  实现
+
+
+附录
+settler注入
+  <!-- 常量注入 -->
+  <bean id="" class="">
+    <property name="propertyName" value="propertyValue"/>
+  </bean>
+  <!-- bean注入 -->
+  <bean id="" class="">
+    <property name="propertyName" ref="beanId"/>
+  </bean>
+  <!-- 数组注入 -->
+  <bean id="" class="">
+    <property name="propertyName">
+	  <array>
+	    <value>1</value>
+		<value>2</value>
+	  </array>
+	</property>
+  </bean>
+  <!-- List 注入 -->
+  <bean id="" class="">
+    <property name="propertyName">
+	  <list>
+	    <value>1</value>
+		<value>2</value>
+	  </list>
+	</property>
+  </bean>
+  <!-- Map 注入 -->
+  <bean id="" class="">
+    <property name="propertyName">
+	  <map>
+	    <entry key="keyName" value="keyValue"/>
+		<entry>
+		  <key><value>keyName</value></key>
+		  <value>keyValue</value>
+		</entry>
+	  </list>
+	</property>
+  </bean>
+  <!-- Set 注入 -->
+  <bean id="" class="">
+    <property name="propertyName">
+	  <set>
+	    <value><value/>
+	    <value><value/>
+	  </set>
+	</property>
+  </bean>
+  <!-- Null 注入 -->
+  <bean id="" class="">
+    <property name="propertyName"><null/></property>
+  </bean>
+  <!-- Property 注入 -->
+  <bean id="" class="">
+    <property name="propertyName">
+	  <props>
+	    <prop key="">value</prop>
+	  </props>
+	</property>
+  </bean>
+  <!-- P(prop)命名空间注入 -->
+  <bean id="" class="" p:xxx="xxxValue"/>
+  <!-- C(class)命名空间注入 -->
+  <bean id="" class="" c:xxx="xxxValue"/>
