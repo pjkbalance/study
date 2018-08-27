@@ -1,5 +1,5 @@
 创建者模式 - 用于创建对象
-单例模式
+单例模式 singleton
 核心作用
   保证一个类只有一个实例
   全局提供一个访问该实例的访问点
@@ -16,6 +16,18 @@
 单例模式 (除枚举外) 的 破解 及 防止
   反射 (cn.jk.study.designPattern.singleton.Demo6 / cn.jk.study.designPattern.singleton.Test1)
   反序列化 (cn.jk.study.designPattern.singleton.Demo6 / cn.jk.study.designPattern.singleton.Test2)
+
+工厂模式 factory
+核心作用
+  创建者 和 调用者 分离
+实现方式
+  简单工厂模式
+  工厂方法模式
+  抽象工厂模式
+
+
+
+
 
 
 

@@ -26,3 +26,6 @@ lib/
 
 # nodejs
 node_modules
+
+# video
+doc/designPattern-doc/GOF23设计模式全解/*

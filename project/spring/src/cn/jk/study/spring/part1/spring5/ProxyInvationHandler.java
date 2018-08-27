@@ -19,9 +19,12 @@ public class ProxyInvationHandler implements InvocationHandler {
      */
     public Object getProxy() {
         return Proxy.newProxyInstance(
-                this.getClass().getClassLoader(),//类加载器
-                target.getClass().getInterfaces(),//所需代理的接口
-                this//处理接口方法的调用类（invoke方法所在类）
+                //类加载器
+                this.getClass().getClassLoader(),
+                //所需代理的接口
+                target.getClass().getInterfaces(),
+                //处理接口方法的调用类（invoke方法所在类）
+                this
         );
     }
 

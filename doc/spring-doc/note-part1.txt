@@ -84,15 +84,15 @@ proxy.png
 缺点
   更多的类 (代理类)，工作两边打
 
-动态代理 (cn.jk.study.part1.spring5)
+动态代理 (https://www.cnblogs.com/9513-/p/8432276.html)
   角色与静态代理一致
   代理类是动态生成的
 动态代理分为
   基于接口的动态代理 - jdk动态代理原理
   基于类的动态代理 - cglib
-目前使用 javasist 生成动态代理
 
-jdk 动态代理
+jdk 动态代理 (cn.jk.study.part1.spring5)
+只支持委托类和代理类实现共同的接口的方式。
 InvocationHandler 接口 - 代理实例 (Proxy) 的 调用处理程序 ( rent() ) 实现的接口
 每个 代理实例 具有一个 关联的 调用处理程序。对 代理实例 调用方法时 (proxy.rent())，将对方法进行编码并将其指派给他调用处理程序的 invoke 方法
 invoke(Object proxy, Method method, Object[] args)
@@ -107,6 +107,39 @@ static Object newProxyInstance(ClassLoader loader, Class<?>[] interfaces, Invoca
   interfaces: 代理类需要实现的借口
   h: 纸牌方法调用的调用处理程序
 一个动态代理一般代理 多个 属于 某一类业务 的类
+
+$Proxy0.java - proxy1.png
+  $Proxy0: 是内存中的代理类，在$Proxy0中会持有一个InvocationHandler接口的实例类的引用，所以此Test类先是调用了内存中的$Proxy0.eat()；
+  执行$Proxy0类中的invoke
+特征
+  它是对目标类的代理，那么这个内存中中的代理类的类型必须和被代理类（目标类）的类型一致。 - 代码中 (Person)Proxy.newProxyInstance.. 进行了向下转型操作。
+  内存中的代理类必须持有InvocationHandler接口的实现类引用。
+
+cglib 动态代理 (cn.jk.study.part1.cglib)
+支持实现共同父类的情况
+MethodInterceptor
+  //所有拦截器执行的方法，类似 invoke
+  public Object intercept(Object obj, Method method, Object[] args, MethodProxy proxy) throws Throwable;
+Enhancer
+  //设置委托类和代理类的公共接口或者公共父类。
+  public void setSuperclass(Class superclass) {
+    if (superclass != null && superclass.isInterface()) {
+      setInterfaces(new Class[]{ superclass });
+    } else if (superclass != null && superclass.equals(Object.class)) {
+      // affects choice of ClassLoader
+      this.superclass = null;
+    } else {
+      this.superclass = superclass;
+    }
+  }
+  //通知委托类
+  public void setCallback(final Callback callback) {
+    setCallbacks(new Callback[]{ callback });
+  }
+AbstractClassGenerator
+  //创建需要的代理类
+  protected Object create(Object key)
+
 
 
 面向切面编程 AOP - 在不改变原有代码的情况下新增功能

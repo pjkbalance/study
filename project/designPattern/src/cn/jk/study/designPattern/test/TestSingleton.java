@@ -1,6 +1,7 @@
 package cn.jk.study.designPattern.test;
 
 import cn.jk.study.designPattern.singleton.Demo1;
+import cn.jk.study.designPattern.singleton.Demo2;
 import sun.java2d.SurfaceDataProxy;
 
 import java.util.concurrent.CountDownLatch;
@@ -11,7 +12,7 @@ import java.util.concurrent.CountDownLatch;
 public class TestSingleton {
     public static void main(String... args) throws InterruptedException {
         //等待线程的个数
-        int num = 10;
+        int num = 100;
         final CountDownLatch c = new CountDownLatch(num);
 
         long start = System.currentTimeMillis();
@@ -19,7 +20,7 @@ public class TestSingleton {
             new Thread(new Runnable() {
                 @Override
                 public void run() {
-                    for (int i = 0; i < 1000; i++) {
+                    for (int i = 0; i < 10000; i++) {
                         Demo1 d = Demo1.getInstance();
                     }
                     //num--

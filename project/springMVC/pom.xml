@@ -17,7 +17,6 @@
             <scope>provided</scope>
         </dependency>
 
-        <!--
                 <dependency>
                     <groupId>org.springframework</groupId>
                     <artifactId>spring-context</artifactId>
@@ -28,7 +27,6 @@
                     <artifactId>spring-webmvc</artifactId>
                     <version>5.0.8.RELEASE</version>
                 </dependency>
-        -->
 
         <dependency>
             <groupId>junit</groupId>
