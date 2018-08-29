@@ -1,0 +1,21 @@
+类加载器 - 双亲委派机制 - 安全: 防止覆盖 java 原生代码
+底层原理: 沙箱模型
+Bootstrap Classloader - %JAVA_HOME%/jre/lib/rt.jar
+^
+|
+Extensioin Classloader - %JAVA_HOME%/jre/lib/ext/*.jar
+^
+|
+Application Classloader - $CLASSPATH
+^
+|
+自定义 Classloader
+
+NATIVE 本地接口
+JNI - Java Native Interface - 访问 C/C++(操作系统使用语言) 接口，进行对系统的操作
+声明关键字: native
+
+PC 寄存器
+
+
+
