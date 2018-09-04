@@ -1,7 +1,7 @@
 package cn.jk.study.spring.annotation;
 
 import cn.jk.study.spring.annotation.bean.Person;
-import cn.jk.study.spring.annotation.config.MainConfig;
+import cn.jk.study.spring.annotation.config.BeanConfig;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -21,7 +21,7 @@ public class Index {
         System.out.println("===========================================\r\n");
     }
     private static void classConfig() {
-        ApplicationContext ac = new AnnotationConfigApplicationContext(MainConfig.class);
+        ApplicationContext ac = new AnnotationConfigApplicationContext(BeanConfig.class);
         //Person p = (Person) ac.getBean("personClass");
         //System.out.println(p);
         /*
