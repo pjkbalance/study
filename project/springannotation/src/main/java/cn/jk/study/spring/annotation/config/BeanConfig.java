@@ -42,7 +42,9 @@ import org.springframework.context.annotation.*;
  *   @Import({
  *     需要导入组件的 class,
  *     继承 ImportSelector 接口的类的 class,
+ *     @see cn.jk.study.spring.annotation.importConfig.MyImportSelector
  *     继承 ImportBeanDefinitionRegistrar 接口的类的 class,
+ *     @see cn.jk.study.spring.annotation.importConfig.MyImportBeanDefinitionRegistrar
  *   })
  * 4. 使用 spring 提供的 FactoryBean 接口 (cn.jk.study.spring.annotation.factoy.ColorFactoryBean)
  */

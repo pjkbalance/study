@@ -13,7 +13,7 @@ public class LifeTest {
         System.out.println("\n===>>> spring start create\n");
         AnnotationConfigApplicationContext ac = new AnnotationConfigApplicationContext(LifeConfig.class);
         System.out.println("\n<<<=== spring is created\n");
-        ac.getBean("carTest");
+        ac.getBean("car");
         System.out.println("\n===>>> spring start close\n");
         ac.close();
         System.out.println("\n<<<=== spring is closed\n");

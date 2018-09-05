@@ -22,11 +22,19 @@ import org.springframework.context.annotation.ComponentScan;
  *   1. @Bean 注解指定 initMethod / destroyMethod - cn.jk.study.spring.annotation.bean.Car
  *   2. bean 实现 InitializingBean / DisposableBean 接口 - cn.jk.study.spring.annotation.bean.Car
  *   3. bean 中方法使用 @PostConstruct / @PreDestroy 注解 (JSR250定义) - cn.jk.study.spring.annotation.bean.Car
- *   4. 实现 BeanPostProcessor 接口 (bean 后置处理器) - cn.jk.study.spring.annotation.processor.MyBeanPostProcessor
+ *   4. 实现 BeanPostProcessor 接口 (bean 后置处理器)
+ *      @see cn.jk.study.spring.annotation.processor.MyBeanPostProcessor
+ *
+ * Spring 底层对 BeanPostProcessor 的使用
+ * @see cn.jk.study.spring.annotation.bean.ApplicationContextTest
+ *   bean 赋值
+ *   @Aurowired 注入组件
+ *   注释
+ *   ...
  *
  * Created by jiakang on 2018/9/4.
  */
-@ComponentScan("cn.jk.study.spring.annotation.processor")
+@ComponentScan("cn.jk.study.spring.annotation")
 public class LifeConfig {
     //@Lazy
     //@Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
