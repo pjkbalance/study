@@ -9,6 +9,7 @@ import javax.annotation.PreDestroy;
 /**
  * Created by jiakang on 2018/9/4.
  */
+
 public class Car implements InitializingBean, DisposableBean {
     public Car() {
         System.out.println("Car constructor");
