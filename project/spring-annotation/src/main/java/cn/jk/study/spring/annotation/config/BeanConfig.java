@@ -14,8 +14,9 @@ import org.springframework.context.annotation.*;
  * Created by jiakang on 2018/9/3.
  */
 
-//定义配置类，作用相当于配置文件
-
+/**
+ * 定义配置类，作用相当于配置文件
+ */
 @Configuration
 /**
  * value: 指定要扫描的包

@@ -1,8 +1,13 @@
 package cn.jk.study.spring.annotation.service;
 
+import org.springframework.context.annotation.Import;
+
 /**
  * Created by jiakang on 2018/9/6.
  */
+@Import({
+        LogAspects.class
+})
 public class MathCalculator {
     public double div (int i, int j) {
         System.out.println("MathCalculator.div("+i+", "+j+")");

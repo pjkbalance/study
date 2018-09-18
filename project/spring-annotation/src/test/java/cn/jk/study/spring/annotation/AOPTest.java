@@ -13,10 +13,11 @@ public class AOPTest {
     public void test() {
         AnnotationConfigApplicationContext ac = new AnnotationConfigApplicationContext(AOPConfig.class);
         MathCalculator cal = (MathCalculator) ac.getBean(MathCalculator.class.getName());
+        MathCalculator cal1 = new MathCalculator();
         System.out.println(cal.div(9, 3));
         System.out.println(cal.doubleI(4));
         System.out.println(cal.getZero());
-        System.out.println(cal.div(1,0));
+        //System.out.println(cal.div(1,0));
         ac.close();
     }
 }

@@ -159,7 +159,6 @@ bean = applyBeanPostProcessorsAfterInitialization(bean, beanName);
  */
 
 @Import({
-        LogAspects.class,
         MathCalculator.class
 })
 @EnableAspectJAutoProxy
