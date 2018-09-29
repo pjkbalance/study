@@ -11,9 +11,8 @@ import org.springframework.stereotype.Repository;
 public class UserDao {
     @Autowired
     private JdbcTemplate jt;
-    public void insert() {
+    public void insert(String id) {
         String sql = "insert into `tbl_test`(id, name) values (?,?)";
-        String id = "4";
         String name = "project-insert";
         jt.update(sql, id, name);
     }
