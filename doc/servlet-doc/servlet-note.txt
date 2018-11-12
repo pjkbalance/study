@@ -1,0 +1,5 @@
+Servlet Container Initializer 【servlet容器初始化】
+Servlet 容器启动时会扫描当前应用每一个 jar 包中 ServletContainerInitializer 的实例
+条件1. ServletContainerInitializer 实现类
+  @HandlesTypes(value={}) 容器初始化之前需要实例化的类型，包括类型的子类及实现
+条件2. META-INF/services/javax.servlet.ServletContainerInitializer 文件中的内容为实现类的全类名
